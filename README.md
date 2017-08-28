@@ -9,16 +9,8 @@ Add **scripts** inside `dist` folder to your page.
 
 > If `dist` folder is not included, run `npm i && npm run build` to build it.
 
-### Standard way
 ```javascript
-// var player = videojs('my-player')
-nrvideo.Core.addTracker(new VideojsTracker(player))
-```
-### VideoJS Plugin Ecosystem
-You can use built-in Videojs plugin system.
-
-```javascript
-// var player = videojs('my-player')
-player.newrelic()
+// var player = jwplayer('my-player')
+nrvideo.Core.addTracker(new nrvideo.JwplayerTracker(player))
 ```
 
