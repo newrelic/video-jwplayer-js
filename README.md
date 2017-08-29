@@ -1,11 +1,14 @@
-# newrelic-video-videojs [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com)
-#### [New Relic](http://newrelic.com) video tracking for Videojs
+# newrelic-video-jwplayer [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com)
+#### [New Relic](http://newrelic.com) video tracking for JWPlayer
 
 ## Requirements
 This video monitor solutions works on top of New Relic's **Browser Agent**.
 
 ## Usage
-Add **scripts** inside `dist` folder to your page.
+Load **scripts** inside `dist` folder into your page.
+```html
+<script src="../dist/newrelic-video-jwplayer.min.js"></script>
+```
 
 > If `dist` folder is not included, run `npm i && npm run build` to build it.
 
