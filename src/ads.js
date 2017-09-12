@@ -105,21 +105,21 @@ export default class JwplayerAdsTracker extends nrvideo.Tracker {
     this.sendResume()
   }
 
-  adSkippedListener (e) {
+  onSkipped (e) {
     this.sendEnd({ skipped: true })
     this.resetValues()
   }
 
-  adCompleteListener (e) {
+  onComplete (e) {
     this.sendEnd()
     this.resetValues()
   }
 
-  adClickListener (e) {
+  onClick (e) {
     this.sendAdClick({ url: e.tag })
   }
 
-  adErrorListener (e) {
+  onError (e) {
     this.sendError({ errorMessage: e.message })
   }
 
