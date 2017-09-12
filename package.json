@@ -8,7 +8,7 @@
     "build:dev": "webpack",
     "watch": "webpack -p --progress --color --watch",
     "watch:dev": "webpack --progress --color --watch",
-    "prezip": "npm run build",
+    "prezip": "npm run build && rm -f dist/*.map",
     "zip": "zip -P newrelic -x '*.DS_Store' -r jwplayer.zip dist samples README.md CHANGELOG.md EULA.md",
     "clean": "rm -rf dist *.zip"
   },
@@ -17,7 +17,7 @@
     "url": "git@source.datanerd.us:video/jwplayer-js.git"
   },
   "author": "Jordi Aguilar",
-  "license": "UNLICENSED",
+  "license": "SEE IN FILE <EULA.md>",
   "dependencies": {
     "newrelic-video-core": "https://source.datanerd.us/api/v3/repos/video/core-js/tarball/master?access_token=a0ffea13c434546f2378ab5244846bb1a3d0a690"
   },
