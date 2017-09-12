@@ -48,11 +48,8 @@ export default class JwplayerTracker extends nrvideo.Tracker {
   }
 
   getTitle () {
-    return this.title
-  }
-
-  getIsLive () {
-    return this.isLive
+    let item = this.player.getPlaylistItem()
+    if (item) return item.title
   }
 
   getSrc () {
