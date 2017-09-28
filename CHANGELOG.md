@@ -5,7 +5,7 @@ All notable changes to this project will be documented in this file.
 
 ## [0.1.3] - 2017/09/28
 ### Remove
-- Removed `adPosition` as player library is not reliable on that information.
+- Remove `adPosition` as player library is not reliable on that information.
 
 ### Change
 - Added `*_END` after errors.
