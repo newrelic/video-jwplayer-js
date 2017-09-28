@@ -17,3 +17,6 @@ Load **scripts** inside `dist` folder into your page.
 nrvideo.Core.addTracker(new nrvideo.JwplayerTracker(player))
 ```
 
+## Known Limitations
+Due to the information exposed by player provider, this tracker may not be able to report:
+- `adPosition`.
