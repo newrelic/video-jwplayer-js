@@ -1,7 +1,7 @@
 import * as nrvideo from 'newrelic-video-core'
 import { version } from '../package.json'
 
-export default class JwplayerAdsTracker extends nrvideo.Tracker {
+export default class JwplayerAdsTracker extends nrvideo.VideoTracker {
   getTrackerName () {
     return 'jwplayer-ads'
   }
@@ -24,16 +24,6 @@ export default class JwplayerAdsTracker extends nrvideo.Tracker {
 
   getTitle () {
     return this.title
-  }
-
-  getPosition () {
-    if (this.position) {
-      return this.position
-    } else if (this.parentTracker.state.isStarted) {
-      return nrvideo.Constants.AdPositions.MID
-    } else {
-      return nrvideo.Constants.AdPositions.PRE
-    }
   }
 
   registerListeners () {
@@ -86,13 +76,11 @@ export default class JwplayerAdsTracker extends nrvideo.Tracker {
   }
 
   onStarted (e) {
-    this.position = e.adposition
     this.resource = e.tag
     this.title = e.adtitle
   }
 
   onImpression (e) {
-    this.position = e.adposition
     this.resource = e.tag
     this.title = e.adtitle
   }
@@ -121,12 +109,12 @@ export default class JwplayerAdsTracker extends nrvideo.Tracker {
 
   onError (e) {
     this.sendError({ errorMessage: e.message })
+    this.sendEnd()
   }
 
   resetValues () {
     this.playhead = undefined
     this.duration = undefined
-    this.position = undefined
     this.resource = undefined
     this.title = undefined
   }

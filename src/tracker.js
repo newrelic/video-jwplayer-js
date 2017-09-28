@@ -2,7 +2,7 @@ import * as nrvideo from 'newrelic-video-core'
 import {version} from '../package.json'
 import JwplayerAdsTracker from './ads'
 
-export default class JwplayerTracker extends nrvideo.Tracker {
+export default class JwplayerTracker extends nrvideo.VideoTracker {
   getTrackerName () {
     return 'jwplayer'
   }
@@ -178,9 +178,12 @@ export default class JwplayerTracker extends nrvideo.Tracker {
 
   onError (e) {
     this.sendError({ errorMessage: e.message })
+    this.sendEnd()
   }
+
   onSetupError (e) {
     this.sendError({ errorMessage: e.message })
+    this.sendEnd()
   }
 }
 

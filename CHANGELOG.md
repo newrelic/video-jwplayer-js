@@ -1,6 +1,14 @@
 # CHANGELOG
+All notable changes to this project will be documented in this file.
 
 ## Unreleased
+
+## [0.1.3] - 2017/09/28
+### Remove
+- Removed `adPosition` as player library is not reliable on that information.
+
+### Change
+- Added `*_END` after errors.
 
 ## [0.1.2] - 2017/09/12
 ### Fix
