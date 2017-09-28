@@ -17,7 +17,7 @@
     "url": "git@source.datanerd.us:video/jwplayer-js.git"
   },
   "author": "Jordi Aguilar",
-  "license": "SEE IN FILE <EULA.md>",
+  "license": "MIT",
   "dependencies": {
     "newrelic-video-core": "https://source.datanerd.us/api/v3/repos/video/core-js/tarball/master?access_token=a0ffea13c434546f2378ab5244846bb1a3d0a690"
   },
