@@ -14,7 +14,7 @@ export default class JwplayerAdsTracker extends nrvideo.VideoTracker {
     return this.duration
   }
 
-  getResource () {
+  getSrc () {
     return this.resource
   }
 

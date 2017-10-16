@@ -2,6 +2,8 @@
 All notable changes to this project will be documented in this file.
 
 ## Unreleased
+### Fix
+- Fixed ad tracker not reporting `adSrc` correctly.
 
 ## [0.1.3] - 2017/09/28
 ### Remove
