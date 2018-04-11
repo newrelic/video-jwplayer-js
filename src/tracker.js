@@ -137,8 +137,8 @@ export default class JwplayerTracker extends nrvideo.VideoTracker {
     }
   }
 
-  onFirstFrame () {
-    this.sendStart()
+  onFirstFrame (e) {
+    this.sendStart({ timeSincePlayAttempt: e.loadTime })
   }
 
   onPause () {
