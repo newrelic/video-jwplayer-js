@@ -2,7 +2,7 @@
 #### [New Relic](http://newrelic.com) video tracking for JWPlayer
 
 ## Requirements
-This video monitor solutions works on top of New Relic's **Browser Agent**.
+This video monitor solution works on top of New Relic's **Browser Pro + SPA Agent**.
 
 ## Usage
 Load **scripts** inside `dist` folder into your page.
