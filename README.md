@@ -3,7 +3,7 @@
 # New Relic JW Player JS Tracker
 
 
-The New Relic JWPlayer tracker instruments the JW Player.
+The New Relic JWPlayer tracker instruments the JW Player. It requires New Relic Browser Pro with SPA.  It must be used on a page where the New Relic Browser JS Snippet is present.   See the `samples` folder for an example.
 
 ## Build
 
@@ -37,10 +37,38 @@ Load **scripts** inside `dist` folder into your page.
 // var player = jwplayer('my-player')
 nrvideo.Core.addTracker(new nrvideo.JwplayerTracker(player))
 ```
+### Custom Attributes
+You can add custom attributes in the following ways.  You can override OOTB attributes or create your own.
+```
+// set tracker
+// add custom attributes at player launch
+
+const tracker = new nrvideo.JwplayerTracker(player,{ customData: { 
+  contentTitle: "Override Existing Title",
+  myPlayerName: "myPlayeer", 
+  myPlayerVersion: "9.4.2"
+} })
+
+nrvideo.Core.addTracker(tracker)
+
+// add custom attribute anywhere 
+tracker.customData.myErrorMsg = "DVR Failed"
+```
+
+### Verify instrumentation
+On the page you've instrumented, append the follwing the URL and you will see the video events emitted in the browser console.
+
+```
+?nrvideo-debug=true
+```
 
 ### Examples
 
 Check out the `samples` folder for complete usage examples.
+
+## Data Model
+
+To see what events (actions) and attributes are captured by the JW Player tracker go [here](https://docs.google.com/document/d/e/2PACX-1vSECNAxbKmYYOH23rA5k02NTEZDX20PTx1VXB_3Kz8gVBwUCdlPpizTrxu9lO6jW1-wXd5Yq4q_IUH6/pub#h.o16zqioqw5dk)
 
 ## Known Limitations
 Due to the information exposed by player provider, this tracker may not be able to report:
