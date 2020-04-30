@@ -45,7 +45,7 @@ You can add custom attributes in the following ways.  You can override OOTB attr
 
 const tracker = new nrvideo.JwplayerTracker(player,{ customData: { 
   contentTitle: "Override Existing Title",
-  myPlayerName: "myPlayeer", 
+  myPlayerName: "myPlayer", 
   myPlayerVersion: "9.4.2"
 } })
 
