@@ -1,9 +1,9 @@
 # CHANGELOG
 All notable changes to this project will be documented in this file.
 
-## Unreleased
+## [0.3.0] - 2020/05/04
 ### Fix
-- Fix ad tracker not reporting `adSrc` correctly.
+- Updated old buggy dependencies.
 
 ## [0.2.0] - 2018/04/11
 ### Add
