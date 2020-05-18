@@ -56,11 +56,20 @@ tracker.customData.myErrorMsg = "DVR Failed"
 ```
 
 ### Verify instrumentation
-On the page you've instrumented, append the follwing the URL and you will see the video events emitted in the browser console.
 
-```
-?nrvideo-debug=true
-```
+On the page you've instrumented...
+
+&nbsp;&nbsp; Is Browser Agent loaded? → Type `newrelic` in the console.
+
+&nbsp;&nbsp; Is Video Script Loaded? → Type `nrvideo` in the console.
+
+&nbsp;&nbsp; Turn on debug → add `?nrvideo-debug=true` or `&nrvideo-debug=true` in the URL.
+
+&nbsp;&nbsp; Is Video Tracker correctly instantiated? → filter console by `[nrvideo]` and look for logs.
+
+&nbsp;&nbsp; Search for `Tracker` or `nrvideo`.
+
+&nbsp;&nbsp;&nbsp;&nbsp;<img width="200" alt="Console Search" src="https://user-images.githubusercontent.com/8813505/82217239-22172c00-98e8-11ea-9aa3-a9a675fd65a5.png">
 
 ### Examples
 
@@ -68,7 +77,7 @@ Check out the `samples` folder for complete usage examples.
 
 ## Data Model
 
-To see what events (actions) and attributes are captured by the JW Player tracker go [here](https://docs.google.com/document/d/e/2PACX-1vSECNAxbKmYYOH23rA5k02NTEZDX20PTx1VXB_3Kz8gVBwUCdlPpizTrxu9lO6jW1-wXd5Yq4q_IUH6/pub#h.o16zqioqw5dk)
+To understand which events (actions) and attributes are captured and emitted by the JW Player tracker go [here](https://docs.google.com/document/d/e/2PACX-1vSECNAxbKmYYOH23rA5k02NTEZDX20PTx1VXB_3Kz8gVBwUCdlPpizTrxu9lO6jW1-wXd5Yq4q_IUH6/pub#h.o16zqioqw5dk)
 
 ## Known Limitations
 Due to the information exposed by player provider, this tracker may not be able to report:
