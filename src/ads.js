@@ -35,7 +35,6 @@ export default class JwplayerAdsTracker extends nrvideo.VideoTracker {
     this.player.on('adBreakStart', this.onBreakStart.bind(this))
     this.player.on('adBreakEnd', this.onBreakEnd.bind(this))
     this.player.on('adBlock', this.onBlock.bind(this))
-    //this.player.on('adRequest', this.onRequest.bind(this))
     this.player.on('adTime', this.onTime.bind(this))
     this.player.on('adStarted', this.onStarted.bind(this))
     this.player.on('adImpression', this.onImpression.bind(this))
@@ -51,7 +50,6 @@ export default class JwplayerAdsTracker extends nrvideo.VideoTracker {
     this.player.off('adBreakStart', this.onBreakStart)
     this.player.off('adBreakEnd', this.onBreakEnd)
     this.player.off('adBlock', this.onBlock)
-    //this.player.off('adRequest', this.onRequest)
     this.player.off('adTime', this.onTime)
     this.player.off('adStarted', this.onStarted)
     this.player.off('adImpression', this.onImpression)
@@ -76,17 +74,9 @@ export default class JwplayerAdsTracker extends nrvideo.VideoTracker {
     this.emit('AD_BLOCKED', this.getAttributes())
   }
 
-  /*
-  onRequest (e) {
-    this.sendRequest()
-  }
-  */
-
   onTime (e) {
     this.playhead = e.position
     this.duration = e.duration
-    //this.sendRequest()
-    //this.sendStart()
   }
 
   onStarted (e) {
