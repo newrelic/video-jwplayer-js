@@ -1,6 +1,14 @@
 # CHANGELOG
 All notable changes to this project will be documented in this file.
 
+## [0.4.0] - 2020/06/15
+### Add
+- `AD_BREAK_START` and `AD_BREAK_END` events.
+
+### Fix
+- Wrong `adPosition` values.
+- An `AD_REQUEST` was being sent after the ad break ended.
+
 ## [0.3.0] - 2020/05/04
 ### Fix
 - Updated old buggy dependencies.
