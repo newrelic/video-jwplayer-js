@@ -23,11 +23,11 @@
     "newrelic-video-core": "github:newrelic/video-core-js"
   },
   "devDependencies": {
-    "aws-sdk": "^2.696.0",
+    "aws-sdk": "^2.730.0",
     "babel-core": "^6.26.3",
     "babel-loader": "^7.1.5",
     "babel-preset-env": "^1.7.0",
-    "webpack": "^4.43.0",
-    "webpack-cli": "^3.3.11"
+    "webpack": "^4.44.1",
+    "webpack-cli": "^3.3.12"
   }
 }
