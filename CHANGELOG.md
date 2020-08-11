@@ -1,6 +1,10 @@
 # CHANGELOG
 All notable changes to this project will be documented in this file.
 
+## [0.5.0] - 2020/08/11
+### Update
+- Core dependencies.
+
 ## [0.4.0] - 2020/06/15
 ### Add
 - `AD_BREAK_START` and `AD_BREAK_END` events.
