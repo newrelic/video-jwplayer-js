@@ -3,6 +3,17 @@ import {version} from '../package.json'
 import JwplayerAdsTracker from './ads'
 
 export default class JwplayerTracker extends nrvideo.VideoTracker {
+
+  trackerInit() {
+    nrvideo.Log.debug("Tracker Added")
+    if (this.player) {
+      if (this.player.getState() == 'idle' && !this.state.isPlayerReady) {
+        //NOTE: if the tracker is initialized too late, the jwplayer already sent the "ready" event and PLAYER_READY never happens.
+        this.sendPlayerReady()
+      }
+    }
+  }
+
   getTrackerName () {
     return 'jwplayer'
   }
@@ -126,7 +137,6 @@ export default class JwplayerTracker extends nrvideo.VideoTracker {
   }
 
   onReady () {
-    this.sendPlayerReady()
   }
 
   onBeforePlay () {
