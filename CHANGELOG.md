@@ -1,6 +1,10 @@
 # CHANGELOG
 All notable changes to this project will be documented in this file.
 
+## [0.6.0] - 2020/08/13
+### Fix
+- Send `PLAYER_READY` from the tracker init instead of the ready event, that may never arrive if the tracker is started too late.
+
 ## [0.5.0] - 2020/08/11
 ### Update
 - Core dependencies.
