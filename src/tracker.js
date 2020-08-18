@@ -73,7 +73,7 @@ export default class JwplayerTracker extends nrvideo.VideoTracker {
   }
 
   isMuted () {
-    this.player.getMute()
+    return this.player.getMute()
   }
 
   getPlayrate () {
@@ -106,6 +106,7 @@ export default class JwplayerTracker extends nrvideo.VideoTracker {
     ])
 
     this.player.on('ready', this.onReady.bind(this))
+    this.player.on('meta', this.onMeta.bind(this))
     this.player.on('beforePlay', this.onBeforePlay.bind(this))
     this.player.on('firstFrame', this.onFirstFrame.bind(this))
     this.player.on('play', this.onPlay.bind(this))
@@ -122,6 +123,7 @@ export default class JwplayerTracker extends nrvideo.VideoTracker {
 
   unregisterListeners () {
     this.player.off('ready', this.onReady)
+    this.player.off('meta', this.onMeta)
     this.player.off('beforePlay', this.onBeforePlay)
     this.player.off('firstFrame', this.onFirstFrame)
     this.player.off('play', this.onPlay)
@@ -138,6 +140,10 @@ export default class JwplayerTracker extends nrvideo.VideoTracker {
 
   onReady () {
   }
+
+  onMeta (event) {
+     nrvideo.Log.debug("Metadata = ", event)
+  } 
 
   onBeforePlay () {
     this.sendRequest()
