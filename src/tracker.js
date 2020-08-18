@@ -76,6 +76,10 @@ export default class JwplayerTracker extends nrvideo.VideoTracker {
     return this.player.getMute()
   }
 
+  isFullscreen () {
+    return this.player.getFullscreen()
+  }
+
   getPlayrate () {
     if (this.player.getPlaybackRate) {
       return this.player.getPlaybackRate()
