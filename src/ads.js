@@ -26,6 +26,10 @@ export default class JwplayerAdsTracker extends nrvideo.VideoTracker {
     return this.title
   }
 
+  getAdCreativeId () {
+    return this._creativeId
+  }
+
   registerListeners () {
     nrvideo.Log.debugCommonVideoEvents(this.player, [
       null, 'adBreakStart', 'adBreakEnd', 'adBlock', 'adStarted', 'adImpression', 'adPause', 'adPlay', 'adSkipped', 'adComplete',
@@ -80,6 +84,7 @@ export default class JwplayerAdsTracker extends nrvideo.VideoTracker {
   }
 
   onStarted (e) {
+    this._creativeId = this.findNestedVal(e.ima, 'creativeId')
     this.resource = e.tag
     this.title = e.adtitle
 
@@ -124,5 +129,21 @@ export default class JwplayerAdsTracker extends nrvideo.VideoTracker {
     this.duration = undefined
     this.resource = undefined
     this.title = undefined
+    this._creativeId = undefined
+  }
+
+  findNestedVal(object, key) {
+    let value;
+    Object.keys(object).some((k) => {
+        if (k === key) {
+            value = object[k];
+            return true;
+        }
+        if (object[k] && typeof object[k] === 'object') {
+            value = this.findNestedVal(object[k], key);
+            return value !== undefined;
+        }
+    });
+    return value;
   }
 }
