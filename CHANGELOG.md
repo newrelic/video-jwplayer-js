@@ -1,6 +1,14 @@
 # CHANGELOG
 All notable changes to this project will be documented in this file.
 
+## [0.7.0] - 2020/08/19
+### Fix
+- `isMuted` attribute.
+
+### Add
+- `isFullscreen` attribute.
+- `adCreativeId` attribute.
+
 ## [0.6.0] - 2020/08/13
 ### Fix
 - Send `PLAYER_READY` from the tracker init instead of the ready event, that may never arrive if the tracker is started too late.
