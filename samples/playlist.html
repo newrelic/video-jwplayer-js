@@ -80,12 +80,12 @@
         title: "Live HLS",
         file: "http://cdn3.viblast.com/streams/hls/airshow/playlist.m3u8"
       }],
-
-      advertising: ads
+      autostart: true
     });
 
     // set tracker
     nrvideo.Core.addTracker(new nrvideo.JwplayerTracker(player))
+    nrvideo.Core.getTrackers()[0].sendCustom('CUSTOM_REQUEST', 'timeSinceCustomRequest')
   </script>
 </body>
 
