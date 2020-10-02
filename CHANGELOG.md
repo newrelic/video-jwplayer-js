@@ -1,6 +1,10 @@
 # CHANGELOG
 All notable changes to this project will be documented in this file.
 
+## [0.11.0] - 2020/10/02
+### Update
+- Core dependencies.
+
 ## [0.10.0] - 2020/10/01
 ### Update
 - Core dependencies.
