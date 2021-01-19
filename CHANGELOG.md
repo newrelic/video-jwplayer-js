@@ -1,6 +1,11 @@
 # CHANGELOG
 All notable changes to this project will be documented in this file.
 
+## [0.11.1] - 2021/01/19
+### Fix
+- Change `getDuration` unit from seconds to milliseconds
+- Change `getPlayhead` unit from seconds to milliseconds
+
 ## [0.11.0] - 2020/10/02
 ### Update
 - Core dependencies.
