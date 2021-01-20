@@ -23,11 +23,11 @@ export default class JwplayerTracker extends nrvideo.VideoTracker {
   }
 
   getPlayhead () {
-    return this.player.getPosition()
+    return this.player.getPosition() * 1000;
   }
 
   getDuration () {
-    return this.player.getDuration()
+    return this.player.getDuration() * 1000;
   }
 
   getRenditionBitrate () {
