@@ -1,6 +1,6 @@
 {
   "name": "newrelic-video-jwplayer",
-  "version": "0.11.1",
+  "version": "0.11.2",
   "description": "New relic tracker for jwplayer",
   "main": "src/index.js",
   "scripts": {
