@@ -1,6 +1,10 @@
 # CHANGELOG
 All notable changes to this project will be documented in this file.
 
+## [0.11.2] - 2021/04/30
+### Fix
+- Change ERROR after END problem.
+
 ## [0.11.1] - 2021/01/19
 ### Fix
 - Change `getDuration` unit from seconds to milliseconds
