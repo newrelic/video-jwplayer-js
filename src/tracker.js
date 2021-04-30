@@ -120,7 +120,6 @@ export default class JwplayerTracker extends nrvideo.VideoTracker {
     this.player.on('seeked', this.onSeeked.bind(this))
     this.player.on('complete', this.onEnded.bind(this))
     this.player.on('visualQuality', this.onVisualQuality.bind(this))
-    this.player.on('idle', this.onIdle.bind(this))
     this.player.on('error', this.onError.bind(this))
     this.player.on('setupError', this.onSetupError.bind(this))
   }
@@ -136,7 +135,6 @@ export default class JwplayerTracker extends nrvideo.VideoTracker {
     this.player.off('seek', this.onSeek)
     this.player.off('seeked', this.onSeeked)
     this.player.off('complete', this.onEnded)
-    this.player.off('idle', this.onIdle)
     this.player.off('visualQuality', this.onVisualQuality)
     this.player.off('error', this.onError)
     this.player.off('setupError', this.onSetupError)
@@ -189,10 +187,6 @@ export default class JwplayerTracker extends nrvideo.VideoTracker {
   }
 
   onEnded () {
-    this.sendEnd()
-  }
-
-  onIdle () {
     this.sendEnd()
   }
 
