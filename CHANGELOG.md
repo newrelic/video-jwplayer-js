@@ -1,6 +1,10 @@
 # CHANGELOG
 All notable changes to this project will be documented in this file.
 
+## [0.11.3] - 2024/10/28
+### Update
+- updated webpack and babel dependencies to latest versions
+
 ## [0.11.2] - 2021/04/30
 ### Fix
 - Change ERROR after END problem.
