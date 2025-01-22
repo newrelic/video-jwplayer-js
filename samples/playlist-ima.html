@@ -1,55 +1,56 @@
 <!DOCTYPE html>
 <html>
+  <head>
+    <!-- newrelic browser agent. REMEMBER TO REPLACE THIS SCRIPT WITH YOUR OWN BROWSER AGENT -->
+    <script type="text/javascript" src="agent.js"></script>
 
-<head>
-  <!-- newrelic browser agent. REMEMBER TO REPLACE THIS SCRIPT WITH YOUR OWN BROWSER AGENT -->
-  <script type="text/javascript" src="agent.js"></script>
+    <!-- new relic tracker -->
+    <script src="../dist/newrelic-video-jwplayer.min.js"></script>
 
-  <!-- new relic tracker -->
-  <script src="../dist/newrelic-video-jwplayer.min.js"></script>
+    <!-- jwplayer8. REMEMBER TO REPLACE THIS URL WITH YOUR OWN ACCOUNT -->
+    <script src="https://cdn.jwplayer.com/libraries/KSqyQCeG.js"></script>
+  </head>
 
-  <!-- jwplayer8. REMEMBER TO REPLACE THIS URL WITH YOUR OWN ACCOUNT -->
-  <script src="https://cdn.jwplayer.com/libraries/KSqyQCeG.js"></script>
-  
-</head>
+  <body>
+    <div id="myVideo"></div>
 
-<body>
-  <div id="myVideo"></div>
+    <script type="text/javascript">
+      // Setup IMA ads
+      ads = {
+        client: "googima",
+        schedule:
+          "http://pubads.g.doubleclick.net/gampad/ads?sz=640x480&iu=/124319096/external/ad_rule_samples&ciu_szs=300x250&ad_rule=1&impl=s&gdfp_req=1&env=vp&output=xml_vmap1&unviewed_position_start=1&cust_params=sample_ar%3Dpremidpostpod%26deployment%3Dgmf-js&cmsid=496&vid=short_onecue&correlator=",
+      };
 
-  <script type="text/javascript">
-    // Setup IMA ads
-    ads = {
-      client: "googima",
-      schedule: "http://pubads.g.doubleclick.net/gampad/ads?sz=640x480&iu=/124319096/external/ad_rule_samples&ciu_szs=300x250&ad_rule=1&impl=s&gdfp_req=1&env=vp&output=xml_vmap1&unviewed_position_start=1&cust_params=sample_ar%3Dpremidpostpod%26deployment%3Dgmf-js&cmsid=496&vid=short_onecue&correlator=",
-    }
-    
-    // Setup player
-    var player = jwplayer("myVideo").setup({
-      playlist: [{
-        title: "HLS VOD",
-        file: "http://qthttp.apple.com.edgesuite.net/1010qwoeiuryfg/sl.m3u8"
-      },       {
-        title: "Dash",
-        file: "https://storage.googleapis.com/wvmedia/clear/h264/tears/tears.mpd"
-      },
-      {
-        title: "Live HLS",
-        file: "http://cdn3.viblast.com/streams/hls/airshow/playlist.m3u8"
-      }],
+      // Setup player
+      var player = jwplayer("myVideo").setup({
+        playlist: [
+          {
+            title: "HLS VOD",
+            file: "https://d2zihajmogu5jn.cloudfront.net/bipbop-advanced/bipbop_16x9_variant.m3u8",
+          },
+          {
+            title: "Dash",
+            file: "https://storage.googleapis.com/wvmedia/clear/h264/tears/tears.mpd",
+          },
+          {
+            title: "Live HLS",
+            file: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
+          },
+        ],
 
-      advertising: ads,
+        advertising: ads,
 
-      autostart: true
-    });
+        autostart: true,
+      });
 
-    // set tracker
-    /*
+      // set tracker
+      /*
     nrvideo.Core.addTracker(new nrvideo.JwplayerTracker(player, { 
       adsTracker: new nrvideo.VideoTracker()
     }))
     */
-    nrvideo.Core.addTracker(new nrvideo.JwplayerTracker(player))
-  </script>
-</body>
-
+      nrvideo.Core.addTracker(new nrvideo.JwplayerTracker(player));
+    </script>
+  </body>
 </html>

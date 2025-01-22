@@ -1,94 +1,96 @@
 <!DOCTYPE html>
 <html>
+  <head>
+    <!-- newrelic browser agent. REMEMBER TO REPLACE THIS SCRIPT WITH YOUR OWN BROWSER AGENT -->
+    <script type="text/javascript" src="agent.js"></script>
 
-<head>
-  <!-- newrelic browser agent. REMEMBER TO REPLACE THIS SCRIPT WITH YOUR OWN BROWSER AGENT -->
-  <script type="text/javascript" src="agent.js"></script>
+    <!-- new relic tracker -->
+    <script src="../dist/newrelic-video-jwplayer.min.js"></script>
 
-  <!-- new relic tracker -->
-  <script src="../dist/newrelic-video-jwplayer.min.js"></script>
-
-  <!-- jwplayer7. REMEMBER TO REPLACE THIS URL WITH YOUR OWN ACCOUNT - ->
+    <!-- jwplayer7. REMEMBER TO REPLACE THIS URL WITH YOUR OWN ACCOUNT - ->
   <script src="https://content.jwplatform.com/libraries/uFePQ9f9.js"></script>
   <!---->
-  <!-- jwplayer8. REMEMBER TO REPLACE THIS URL WITH YOUR OWN ACCOUNT -->  
-  <script src="https://content.jwplatform.com/libraries/FuBvJieF.js"></script>
-  <!---->
-  
-</head>
+    <!-- jwplayer8. REMEMBER TO REPLACE THIS URL WITH YOUR OWN ACCOUNT -->
+    <script src="https://content.jwplatform.com/libraries/FuBvJieF.js"></script>
+    <!---->
+  </head>
 
-<body>
-  <div id="myVideo"></div>
-  
-  <script type="text/javascript">
-    var url = window.location.search.match(/ads=([^&]+)/);
-    if (url && url.length > 1) {
+  <body>
+    <div id="myVideo"></div>
+
+    <script type="text/javascript">
+      var url = window.location.search.match(/ads=([^&]+)/);
+      if (url && url.length > 1) {
         url = url[1];
-    }
+      }
 
-    var ads = undefined;
-    switch (url) {
-      case 'ima':
-        ads = {
-          client: "googima",
-          schedule: "http://pubads.g.doubleclick.net/gampad/ads?sz=640x480&iu=/124319096/external/ad_rule_samples&ciu_szs=300x250&ad_rule=1&impl=s&gdfp_req=1&env=vp&output=xml_vmap1&unviewed_position_start=1&cust_params=sample_ar%3Dpremidpostpod%26deployment%3Dgmf-js&cmsid=496&vid=short_onecue&correlator="
-        }
-        break;
-      case 'vast':
-        ads = {
-          client: "vast",
-          schedule: {
-            "myAds": {
-              "offset": "pre",
-              "tag": "http://www.adotube.com/php/services/player/OMLService.php?avpid=oRYYzvQ&platform_version=vast20&ad_type=linear&groupbypass=1&HTTP_REFERER=http://www.longtailvideo.com&video_identifier=longtailvideo.com,test"
-            }
-          }
-        }
-        break;
-      case 'error':
-        ads = {
-          client: "vast",
-          schedule: {
-            "myAds": {
-              "offset": "pre",
-              "tag": "http://fakeurl.com/"
-            }
-          }
-        }
-        break;
-    }
-  </script>
+      var ads = undefined;
+      switch (url) {
+        case "ima":
+          ads = {
+            client: "googima",
+            schedule:
+              "http://pubads.g.doubleclick.net/gampad/ads?sz=640x480&iu=/124319096/external/ad_rule_samples&ciu_szs=300x250&ad_rule=1&impl=s&gdfp_req=1&env=vp&output=xml_vmap1&unviewed_position_start=1&cust_params=sample_ar%3Dpremidpostpod%26deployment%3Dgmf-js&cmsid=496&vid=short_onecue&correlator=",
+          };
+          break;
+        case "vast":
+          ads = {
+            client: "vast",
+            schedule: {
+              myAds: {
+                offset: "pre",
+                tag: "http://www.adotube.com/php/services/player/OMLService.php?avpid=oRYYzvQ&platform_version=vast20&ad_type=linear&groupbypass=1&HTTP_REFERER=http://www.longtailvideo.com&video_identifier=longtailvideo.com,test",
+              },
+            },
+          };
+          break;
+        case "error":
+          ads = {
+            client: "vast",
+            schedule: {
+              myAds: {
+                offset: "pre",
+                tag: "http://fakeurl.com/",
+              },
+            },
+          };
+          break;
+      }
+    </script>
 
-  <div>
-    Ads:
-    <button onclick="location.href='?ads=none'">No Ads</button>
-    <button onclick="location.href='?ads=ima'">IMA3</button>
-    <button onclick="location.href='?ads=vast'">VAST</button>
-    <button onclick="location.href='?ads=error'">ADS ERROR</button>
-  </div>
-  <script type="text/javascript">
-    // Setup player
-    var player = jwplayer("myVideo").setup({
-      playlist: [{
-        title: "HLS VOD",
-        file: "http://qthttp.apple.com.edgesuite.net/1010qwoeiuryfg/sl.m3u8"
-      },       {
-        title: "Dash",
-        file: "https://storage.googleapis.com/wvmedia/clear/h264/tears/tears.mpd"
-      },
-      {
-        title: "Live HLS",
-        file: "https://cph-p2p-msl.akamaized.net/hls/live/2000341/test/master.m3u8"
-      }],
-      autostart: true
-    });
+    <div>
+      Ads:
+      <button onclick="location.href='?ads=none'">No Ads</button>
+      <button onclick="location.href='?ads=ima'">IMA3</button>
+      <button onclick="location.href='?ads=vast'">VAST</button>
+      <button onclick="location.href='?ads=error'">ADS ERROR</button>
+    </div>
+    <script type="text/javascript">
+      // Setup player
+      var player = jwplayer("myVideo").setup({
+        playlist: [
+          {
+            title: "HLS VOD",
+            file: "http://qthttp.apple.com.edgesuite.net/1010qwoeiuryfg/sl.m3u8",
+          },
+          {
+            title: "Dash",
+            file: "https://storage.googleapis.com/wvmedia/clear/h264/tears/tears.mpd",
+          },
+          {
+            title: "Live HLS",
+            file: "https://cph-p2p-msl.akamaized.net/hls/live/2000341/test/master.m3u8",
+          },
+        ],
+        autostart: true,
+      });
 
-    // set tracker
-    nrvideo.Core.addTracker(new nrvideo.JwplayerTracker(player))
-    nrvideo.Core.getTrackers()[0].sendCustom('CUSTOM_REQUEST', 'timeSinceCustomRequest')
-  </script>
-</body>
-
+      // set tracker
+      nrvideo.Core.addTracker(new nrvideo.JwplayerTracker(player));
+      nrvideo.Core.getTrackers()[0].sendCustom(
+        "CUSTOM_REQUEST",
+        "timeSinceCustomRequest"
+      );
+    </script>
+  </body>
 </html>
-
-  

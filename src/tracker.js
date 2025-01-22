@@ -1,207 +1,239 @@
-import * as nrvideo from 'newrelic-video-core'
-import {version} from '../package.json'
-import JwplayerAdsTracker from './ads'
+import * as nrvideo from "newrelic-video-core";
+import { version } from "../package.json";
+import JwplayerAdsTracker from "./ads";
 
 export default class JwplayerTracker extends nrvideo.VideoTracker {
+  constructor(player) {
+    super(player);
+    console.log("JwplayerTracker constructor", player);
+  }
 
   trackerInit() {
-    nrvideo.Log.debug("Tracker Added")
+    nrvideo.Log.debug("Tracker Added");
     if (this.player) {
-      if (this.player.getState() == 'idle' && !this.state.isPlayerReady) {
+      if (this.player.getState() == "idle" && !this.state.isPlayerReady) {
         //NOTE: if the tracker is initialized too late, the jwplayer already sent the "ready" event and PLAYER_READY never happens.
-        this.sendPlayerReady()
+        this.sendPlayerReady();
       }
     }
   }
 
-  getTrackerName () {
-    return 'jwplayer'
+  getTrackerName() {
+    return "jwplayer";
   }
 
-  getTrackerVersion () {
-    return version
+  getTrackerVersion() {
+    return version;
   }
 
-  getPlayhead () {
+  getPlayerName() {
+    return "JW Player";
+  }
+
+  getInstrumentationProvider() {
+    return "New Relic";
+  }
+
+  getInstrumentationName() {
+    return this.getPlayerName();
+  }
+
+  getInstrumentationVersion() {
+    return this.getPlayerVersion();
+  }
+
+  getPlayhead() {
     return this.player.getPosition() * 1000;
   }
 
-  getDuration () {
+  getDuration() {
     return this.player.getDuration() * 1000;
   }
 
-  getRenditionBitrate () {
-    let quality = this.player.getVisualQuality()
+  getRenditionBitrate() {
+    let quality = this.player.getVisualQuality();
     if (quality && quality.level) {
-      return quality.level.bitrate
+      return quality.level.bitrate;
     }
   }
 
-  getRenditionName () {
-    let quality = this.player.getVisualQuality()
+  getRenditionName() {
+    let quality = this.player.getVisualQuality();
     if (quality && quality.level) {
-      return quality.level.label
+      return quality.level.label;
     }
   }
 
-  getRenditionWidth () {
-    let quality = this.player.getVisualQuality()
+  getRenditionWidth() {
+    let quality = this.player.getVisualQuality();
     if (quality && quality.level) {
-      return quality.level.width
+      return quality.level.width;
     }
   }
 
-  getRenditionHeight () {
-    let quality = this.player.getVisualQuality()
+  getRenditionHeight() {
+    let quality = this.player.getVisualQuality();
     if (quality && quality.level) {
-      return quality.level.height
+      return quality.level.height;
     }
   }
 
-  getTitle () {
-    let item = this.player.getPlaylistItem()
-    if (item) return item.title
+  getTitle() {
+    let item = this.player.getPlaylistItem();
+    if (item) return item.title;
   }
 
-  getSrc () {
-    let item = this.player.getPlaylistItem()
-    if (item) return item.file
+  getSrc() {
+    let item = this.player.getPlaylistItem();
+    if (item) return item.file;
   }
 
-  getPlayerVersion () {
-    return this.player.version
+  getPlayerVersion() {
+    return this.player.version;
   }
 
-  isMuted () {
-    return this.player.getMute()
+  isMuted() {
+    return this.player.getMute();
   }
 
-  isFullscreen () {
-    return this.player.getFullscreen()
+  isFullscreen() {
+    return this.player.getFullscreen();
   }
 
-  getPlayrate () {
+  getPlayrate() {
     if (this.player.getPlaybackRate) {
-      return this.player.getPlaybackRate()
+      return this.player.getPlaybackRate();
     }
   }
 
-  isAutoplayed () {
-    return this.player.getConfig().autostart
+  isAutoplayed() {
+    return this.player.getConfig().autostart;
   }
 
-  getPreload () {
-    return this.player.getConfig().preload
+  getPreload() {
+    return this.player.getConfig().preload;
   }
 
-  getLanguage () {
-    let tracks = this.player.getAudioTracks()
-    let index = this.player.getCurrentAudioTrack()
+  getLanguage() {
+    let tracks = this.player.getAudioTracks();
+    let index = this.player.getCurrentAudioTrack();
     if (index >= 0) {
-      return tracks[index].language
+      return tracks[index].language;
     }
   }
 
-  registerListeners () {
+  registerListeners() {
     nrvideo.Log.debugCommonVideoEvents(this.player, [
-      'playlist', 'playlistComplete', 'playlistItem', 'beforePlay', 'meta', 'setupError', 'idle',
-      'complete', 'bufferChange', 'buffer', 'firstFrame', 'playbackRateChanged', 'mute', 'levels',
-      'levelsChanged', 'visualQuality', 'beforeComplete', 'ready'
-    ])
+      "playlist",
+      "playlistComplete",
+      "playlistItem",
+      "beforePlay",
+      "meta",
+      "setupError",
+      "idle",
+      "complete",
+      "bufferChange",
+      "buffer",
+      "firstFrame",
+      "playbackRateChanged",
+      "mute",
+      "levels",
+      "levelsChanged",
+      "visualQuality",
+      "beforeComplete",
+      "ready",
+    ]);
 
-    this.player.on('ready', this.onReady.bind(this))
-    this.player.on('meta', this.onMeta.bind(this))
-    this.player.on('beforePlay', this.onBeforePlay.bind(this))
-    this.player.on('firstFrame', this.onFirstFrame.bind(this))
-    this.player.on('play', this.onPlay.bind(this))
-    this.player.on('pause', this.onPause.bind(this))
-    this.player.on('buffer', this.onBuffer.bind(this))
-    this.player.on('seek', this.onSeek.bind(this))
-    this.player.on('seeked', this.onSeeked.bind(this))
-    this.player.on('complete', this.onEnded.bind(this))
-    this.player.on('visualQuality', this.onVisualQuality.bind(this))
-    this.player.on('error', this.onError.bind(this))
-    this.player.on('setupError', this.onSetupError.bind(this))
+    this.player.on("ready", this.onReady.bind(this));
+    this.player.on("meta", this.onMeta.bind(this));
+    this.player.on("beforePlay", this.onBeforePlay.bind(this));
+    this.player.on("firstFrame", this.onFirstFrame.bind(this));
+    this.player.on("play", this.onPlay.bind(this));
+    this.player.on("pause", this.onPause.bind(this));
+    this.player.on("buffer", this.onBuffer.bind(this));
+    this.player.on("seek", this.onSeek.bind(this));
+    this.player.on("seeked", this.onSeeked.bind(this));
+    this.player.on("complete", this.onEnded.bind(this));
+    this.player.on("visualQuality", this.onVisualQuality.bind(this));
+    this.player.on("error", this.onError.bind(this));
+    this.player.on("setupError", this.onSetupError.bind(this));
   }
 
-  unregisterListeners () {
-    this.player.off('ready', this.onReady)
-    this.player.off('meta', this.onMeta)
-    this.player.off('beforePlay', this.onBeforePlay)
-    this.player.off('firstFrame', this.onFirstFrame)
-    this.player.off('play', this.onPlay)
-    this.player.off('pause', this.onPause)
-    this.player.off('buffer', this.onBuffer)
-    this.player.off('seek', this.onSeek)
-    this.player.off('seeked', this.onSeeked)
-    this.player.off('complete', this.onEnded)
-    this.player.off('visualQuality', this.onVisualQuality)
-    this.player.off('error', this.onError)
-    this.player.off('setupError', this.onSetupError)
+  unregisterListeners() {
+    this.player.off("ready", this.onReady);
+    this.player.off("meta", this.onMeta);
+    this.player.off("beforePlay", this.onBeforePlay);
+    this.player.off("firstFrame", this.onFirstFrame);
+    this.player.off("play", this.onPlay);
+    this.player.off("pause", this.onPause);
+    this.player.off("buffer", this.onBuffer);
+    this.player.off("seek", this.onSeek);
+    this.player.off("seeked", this.onSeeked);
+    this.player.off("complete", this.onEnded);
+    this.player.off("visualQuality", this.onVisualQuality);
+    this.player.off("error", this.onError);
+    this.player.off("setupError", this.onSetupError);
   }
 
-  onReady () {
+  onReady() {}
+
+  onMeta(event) {
+    nrvideo.Log.debug("Metadata = ", event);
   }
 
-  onMeta (event) {
-     nrvideo.Log.debug("Metadata = ", event)
-  } 
-
-  onBeforePlay () {
-    this.sendRequest()
+  onBeforePlay() {
+    this.sendRequest();
 
     if (!this.adsTracker) {
-      this.setAdsTracker(new JwplayerAdsTracker(this.player))
+      this.setAdsTracker(new JwplayerAdsTracker(this.player));
     }
   }
 
-  onFirstFrame (e) {
-    this.sendStart({ timeSincePlayAttempt: e.loadTime })
+  onFirstFrame(e) {
+    this.sendStart({ timeSincePlayAttempt: e.loadTime });
   }
 
-  onPause () {
-    this.sendPause()
+  onPause() {
+    this.sendPause();
   }
 
-  onPlay () {
-    this.sendBufferEnd()
-    this.sendResume()
+  onPlay() {
+    this.sendBufferEnd();
+    this.sendResume();
   }
 
-  onBuffer (e) {
-    if (e.reason === 'stalled' || e.reason === 'loading') {
-      this.sendBufferStart()
+  onBuffer(e) {
+    if (e.reason === "stalled" || e.reason === "loading") {
+      this.sendBufferStart();
     }
   }
 
-  onSeek () {
-    this.sendSeekStart()
+  onSeek() {
+    this.sendSeekStart();
   }
 
-  onSeeked () {
-    this.sendSeekEnd()
+  onSeeked() {
+    this.sendSeekEnd();
   }
 
-  onVisualQuality () {
-    this.sendRenditionChanged()
+  onVisualQuality() {
+    this.sendRenditionChanged();
   }
 
-  onEnded () {
-    this.sendEnd()
+  onEnded() {
+    this.sendEnd();
   }
 
-  onError (e) {
-    this.sendError({ errorMessage: e.message })
-    this.sendEnd()
+  onError(e) {
+    this.sendError({ errorName: e.message, errorCode: e?.code });
+    this.sendEnd();
   }
 
-  onSetupError (e) {
-    this.sendError({ errorMessage: e.message })
-    this.sendEnd()
+  onSetupError(e) {
+    this.sendError({ errorName: e.message, errorCode: e?.code });
+    this.sendEnd();
   }
 }
 
 // Static members
-export {
-  JwplayerAdsTracker
-}
+export { JwplayerAdsTracker };
