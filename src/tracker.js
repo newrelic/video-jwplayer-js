@@ -19,7 +19,7 @@ export default class JwplayerTracker extends nrvideo.VideoTracker {
   }
 
   getTrackerName() {
-    return "jwplayer";
+    return "Jw Player";
   }
 
   getTrackerVersion() {
