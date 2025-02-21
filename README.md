@@ -1,110 +1,88 @@
-[![Community Project header](https://github.com/newrelic/open-source-office/raw/master/examples/categories/images/Community_Project.png)](https://github.com/newrelic/open-source-office/blob/master/examples/categories/index.md#community-project)
+[![Community Project header](https://github.com/newrelic/opensource-website/raw/master/src/images/categories/Community_Project.png)](https://opensource.newrelic.com/oss-category/#community-project)
 
-# New Relic JW Player JS Tracker
+# New Relic Jwplayer Tracker Agent
 
+The New Relic Jwplayer Tracker enhances your media applications by tracking video events, playback errors, and other activities, providing comprehensive insights into performance and user interactions.
 
-The New Relic JWPlayer tracker instruments the JW Player. It requires New Relic Browser Pro with SPA.  It must be used on a page where the New Relic Browser JS Snippet is present.   See the `samples` folder for an example.
+- The Jwplayer tracker is available as a ready-to-use JavaScript snippet for easy copy-paste integration.
+- New Relic Jwplayer tracker auto-detects events emitted by Jwplayer Player.
+- Ensure that the **Browser agent** is successfully instrumented before deploying the media tracker.
+- For questions and feedback on this package, please visit the [Explorer's Hub](https://discuss.newrelic.com), New Relic's community support forum.
+- Looking to contribute to the Player Name agent code base? See [DEVELOPING.md](./DEVELOPING.md) for instructions on building and testing the browser agent library, and Contributors.
 
-## Build
+## Adding The Jwplayer Tracker To Your Project
 
-Install dependencies:
+To integrate New Relic Tracker Agent into your web application effectively, you'll need to instrument the Browser Agent code first and then add the player script. Below is a guide on how to do this within your HTML file:
 
-```
-$ npm install
-```
-
-And build:
-
-```
-$ npm run build:dev
-```
-
-Or if you need a production build:
-
-```
-$ npm run build
-```
-
-## Usage
-Load **scripts** inside `dist` folder into your page.
 ```html
-<script src="../dist/newrelic-video-jwplayer.min.js"></script>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>New Relic Tracker Integration</title>
+    <script src="path/to/browser-agent.js"></script>
+    <!-- snippet code generated  -->
+    <script src="path/to/Jwplayer-tracker.js"></script>
+  </head>
+  <body>
+    <!-- Your HTML content -->
+  </body>
+</html>
 ```
 
-> If `dist` folder is not included, run `npm i && npm run build` to build it.
+## Instantiating the Jwplayer Tracker
 
 ```javascript
-// var player = jwplayer('my-player')
-nrvideo.Core.addTracker(new nrvideo.JwplayerTracker(player))
+// Add a JwplayerTracker
+nrvideo.Core.addTracker(new nrvideo.JwplayerTracker(player));
+
+// For setting userId
+nrvideo.Core.addTracker(new nrvideo.JwplayerTracker(player)).setUserId(
+  "userId"
+);
+
+//For setting custom attributes const tracker
+const tracker = new nrvideo.JwplayerjsTracker(player, {
+  customData: {
+    contentTitle: "Override Existing Title",
+    customPlayerName: "myGreatPlayer",
+    customPlayerVersion: "9.4.2",
+  },
+});
+
+// For Sending custom Action with Attributes
+
+const tracker = new nrvideo.JwplayerTracker(player);
+
+nrvideo.Core.addTracker(tracker);
+
+tracker.sendCustom("CUSTOM_ACTION", "state time", {
+  test1: "value1",
+  test2: "value2",
+});
 ```
-### Custom Attributes
-You can add custom attributes in the following ways.  You can override OOTB attributes or create your own.
-```
-// set tracker
-// add custom attributes at player launch
-
-const tracker = new nrvideo.JwplayerTracker(player,{ customData: { 
-  contentTitle: "Override Existing Title",
-  myPlayerName: "myPlayer", 
-  myPlayerVersion: "9.4.2"
-} })
-
-nrvideo.Core.addTracker(tracker)
-
-// add custom attribute anywhere 
-tracker.customData.myErrorMsg = "DVR Failed"
-```
-
-### Verify instrumentation
-
-On the page you've instrumented...
-
-&nbsp;&nbsp; Is Browser Agent loaded? → Type `newrelic` in the console.
-
-&nbsp;&nbsp; Is Video Script Loaded? → Type `nrvideo` in the console.
-
-&nbsp;&nbsp; Turn on debug → add `?nrvideo-debug=true` or `&nrvideo-debug=true` in the URL.
-
-&nbsp;&nbsp; Is Video Tracker correctly instantiated? → filter console by `[nrvideo]` and look for logs.
-
-&nbsp;&nbsp; Search for `Tracker` or `nrvideo`.
-
-&nbsp;&nbsp;&nbsp;&nbsp;<img width="200" alt="Console Search" src="https://user-images.githubusercontent.com/8813505/82217239-22172c00-98e8-11ea-9aa3-a9a675fd65a5.png">
-
-### Examples
-
-Check out the `samples` folder for complete usage examples.
 
 ## Data Model
 
-To understand which events (actions) and attributes are captured and emitted by the JW Player tracker go [here](https://docs.google.com/document/d/e/2PACX-1vSECNAxbKmYYOH23rA5k02NTEZDX20PTx1VXB_3Kz8gVBwUCdlPpizTrxu9lO6jW1-wXd5Yq4q_IUH6/pub#h.o16zqioqw5dk)
+To understand which actions and attributes are captured and emitted by the Jwplayer Player under different event types, see [DataModel.md](./DATAMODEL.md).
 
-## Known Limitations
-Due to the information exposed by player provider, this tracker may not be able to report:
-- `adPosition`.
+## Support
 
-# Open source license
+New Relic hosts and moderates an online forum where customers can interact with New Relic employees as well as other customers to get help and share best practices. Like all official New Relic open source projects, there's a related Community topic in the New Relic [Explorer's Hub](https://discuss.newrelic.com).
 
-This project is distributed under the [Apache 2 license](LICENSE).
+We encourage you to bring your experiences and questions to the [Explorer's Hub](https://discuss.newrelic.com) where our community members collaborate on solutions and new ideas.
 
-# Support
+## Contributing
 
-New Relic has open-sourced this project. This project is provided AS-IS WITHOUT WARRANTY OR DEDICATED SUPPORT. Issues and contributions should be reported to the project here on GitHub.
+We encourage your contributions to improve New Relic Jwplayer Tracker! Keep in mind when you submit your pull request, you'll need to sign the CLA via the click-through using CLA-Assistant. You only have to sign the CLA one time per project. If you have any questions, or to execute our corporate CLA, required if your contribution is on behalf of a company, please drop us an email at opensource@newrelic.com.
 
-We encourage you to bring your experiences and questions to the [Explorers Hub](https://discuss.newrelic.com) where our community members collaborate on solutions and new ideas.
+**A note about vulnerabilities**
 
-## Community
+As noted in our [security policy](../../security/policy), New Relic is committed to the privacy and security of our customers and their data. We believe that providing coordinated disclosure by security researchers and engaging with the security community are important means to achieve our security goals.
 
-New Relic hosts and moderates an online forum where customers can interact with New Relic employees as well as other customers to get help and share best practices. Like all official New Relic open source projects, there's a related Community topic in the New Relic Explorers Hub. You can find this project's topic/threads here:
+If you believe you have found a security vulnerability in this project or any of New Relic's products or websites, we welcome and greatly appreciate you reporting it to New Relic through [our bug bounty program](https://docs.newrelic.com/docs/security/security-privacy/information-security/report-security-vulnerabilities/).
 
-https://discuss.newrelic.com/t/jw-player-js-tracker/100304
+## License
 
-## Issues / enhancement requests
-
-Issues and enhancement requests can be submitted in the [Issues tab of this repository](../../issues). Please search for and review the existing open issues before submitting a new issue.
-
-# Contributing
-
-Contributions are encouraged! If you submit an enhancement request, we'll invite you to contribute the change yourself. Please review our [Contributors Guide](CONTRIBUTING.md).
-
-Keep in mind that when you submit your pull request, you'll need to sign the CLA via the click-through using CLA-Assistant. If you'd like to execute our corporate CLA, or if you have any questions, please drop us an email at opensource+videoagent@newrelic.com.
+New Relic Jwplayer Tracker is licensed under the [Apache 2.0](http://apache.org/licenses/LICENSE-2.0.txt) License.
